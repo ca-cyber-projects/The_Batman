@@ -14,4 +14,4 @@ Time Frame: Sunday, May 29th – Tuesday, May 31st 2022
 
 Time to Complete: about 3 hours 
 
-Cost: Undetermined – based on AWS tier you select and the number of OpenVPN connections (steps follow free tier) 
+Cost: Undetermined – based on AWS tier you select and the number of OpenVPN connections (steps follow free tier)
