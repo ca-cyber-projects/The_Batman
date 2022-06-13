@@ -1,9 +1,0 @@
-Image Name: OpenVPN Access Server (2 connections, free tier) 
-
-OS: Linux/Unix, Ubuntu 18 LTS 
-
-OpenVPN Version: 2.8.5 - updated to 2.10.3 in this project 
-
-Fulfillment Option: 64-bit (x86) AMI 
-
-Type: t2.small (free tier) 
