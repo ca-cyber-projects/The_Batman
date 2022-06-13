@@ -1,1 +1,99 @@
+    Signup for a free AWS account 
 
+    Enter all the necessary info 
+
+      Name 
+
+      Address 
+
+      Credit card 
+
+    Under “Services” in the upper-right, select “Compute” and then “EC2” 
+
+    Select “Launch Instance” 
+
+    Launch an EC2 instance of “OpenVPN Access Server” from the AWS Marketplace (select the one that says free tier eligible) 
+
+    Select the “t2.micro” Instance type (or whichever says free) then click Review and Launch 
+ 
+    Create a new key pair to authenticate to your instance securely, remember the name of this key 
+
+    Download the key pair and remember the file path of the key pair and click “Launch Instance” 
+
+    Navigate back to the page from step 2 and wait for your instance to launch 
+
+    Once your instance shows as running in “Instance state” field, right click your instance and select “Connect” 
+
+    You’ll get a popup that gives you several options to connect 
+
+    Open up Powershell/CMD prompt (Windows) or Terminal (Mac/Linux), keep the default standalone SSH client option 
+
+    Navigate to the file path where you put the key pair and enter the following command 
+
+      chmod 400 [your_private_key_name.pem] 
+
+      This prevents your key pair from being publicly viewable 
+
+    Enter the following into the prompt:  
+
+      ssh -i [/path/to/key/pair/key_pair.pem] root@[your_ec2_instance_ip].amazonaws[.]com 
+
+    Agree to the terms and conditions/defaults (press enter to agree) 
+
+    Once the terms and conditions have been agreed to, you will need to login as the “openvpnas” user, enter the following: 
+
+      ssh -i [/path/to/key/pair/key_pair.pem] openvpnas@[your_ec2_instance_ip].amazonaws[.]com 
+
+    Enter this command to change the admin password (remember this password):  
+
+      sudo passwd openvpn 
+
+    Go back to AWS and select your OpenVPN Access Server instance 
+
+    Scroll down to the “IPv4 Public IP” and copy the IP 
+
+    Enter the following into the address bar: https://[your.public.ip.address]:943/admin 
+
+      Port 943 is the default port for OpenVPN Access Server to access the Admin and Client Web interfaces 
+
+    The page will show that your computer does not trust the certificate provided, this is due to a self-signed cert, proceed to the page 
+
+    Login to the admin page with the openvpn user and the password you set in step 16 
+
+    Agree to the terms and conditions 
+
+    To ensure your traffic is encrypted by the VPN, click the “Configuration” option on the left and select “VPN settings” 
+
+    Under routing, change “Should client internet traffic be routed through the VPN?” to “Yes” 
+
+    Click “Save settings” at the bottom of the page 
+
+    Click “Update running server” at the top to push your changes to the OpenVPN Access Server 
+
+    Next you need to download the OpenVPN client to connect to your VPN 
+
+    Navigate back up to the address bar and enter https://[your.public.ip.address]:943, this will point you to the user login (use the same credentials as you did in step 21) 
+
+    This will prompt you to download the OpenVPN Client Software for your OS 
+
+    Follow the instructions and install the OpenVPN Client on your computer 
+
+    Agree to the terms and conditions 
+
+    Enter the same username and password as you did in 28 
+
+      You may have to import the profile from the page in 30. If so, download the profile and import it into the OpenVPN Client 
+
+    You are now connected to the OpenVPN Access Server running in AWS 
+
+    To test this out, go to Google and enter “what is my IP address” and the public IP of your instance will be returned. You can also test by searching “restaurants near me” and restaurants near where your AWS instance is located will populate. 
+
+    SSH back into your AWS instance from the command line or terminal (step 15) and run the following to update your instance to the latest OS and OpenVPN version 
+
+      Run the commands listed in this article - https://openvpn.net/faq/how-to-upgrade-the-virtual-appliance-to-a-new-version-of-the-access-server/  
+
+      Updated server is OpenVPN Access Server 2.10.3 
+
+    Reboot the server 
+
+    You have successfully created your own VPN server in AWS 
